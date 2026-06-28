@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Tablet2LaTeX
+Comment=Convert handwritten text and formulas to LaTeX using vision-enabled LLMs
+Icon=io.github.frantanautilus.tablet2latex
+Exec=tablet2latex
+Terminal=false
+Type=Application
+Categories=Education;Science;Math;
+MimeType=image/png;
+StartupNotify=true
+Keywords=latex;mathematics;handwriting;conversion;ai;llm;ocr;
