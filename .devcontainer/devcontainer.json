@@ -1,0 +1,52 @@
+{
+  "name": "Tablet2LaTeX GTK4 (Python 3.14 + Flatpak)",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {}
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.analysis.typeCheckingMode": "basic",
+        "[python]": {
+          "editor.defaultFormatter": "ms-python.black-formatter",
+          "editor.formatOnSave": true
+        },
+        "ruff.organizeImports": true,
+        "mypy-type-checker.args": ["--strict"]
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "charliermarsh.ruff",
+        "ms-python.black-formatter",
+        "ms-python.mypy-type-checker"
+      ]
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+  "postStartCommand": "echo 'Tablet2LaTeX devcontainer started. Run `just` to see available tasks.'",
+  "remoteUser": "vscode",
+  "containerEnv": {
+    "PYTHONPATH": "/workspaces/tablet2latex/src",
+    "DISPLAY": "${localEnv:DISPLAY}",
+    "WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
+    "XDG_RUNTIME_DIR": "/tmp/runtime-vscode"
+  },
+  "mounts": [
+    "source=${localEnv:HOME}/.config,target=/home/vscode/.config,type=bind,consistency=cached",
+    "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached",
+    "source=${localEnv:XDG_RUNTIME_DIR},target=/tmp/runtime-vscode,type=bind,consistency=cached"
+  ],
+  "runArgs": [
+    "--privileged",
+    "--net=host"
+  ],
+  "forwardPorts": [],
+  "portsAttributes": {},
+  "shutdownAction": "stopContainer"
+}

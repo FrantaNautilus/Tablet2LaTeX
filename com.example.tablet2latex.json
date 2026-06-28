@@ -1,0 +1,43 @@
+{
+    "app-id": "com.example.tablet2latex",
+    "runtime": "org.gnome.Platform",
+    "runtime-version": "50",
+    "sdk": "org.gnome.Sdk",
+    "command": "tablet2latex",
+    "skip-appstream-compose": true,
+    "finish-args": [
+        "--share=network",
+        "--share=ipc",
+        "--socket=fallback-x11",
+        "--socket=wayland",
+        "--device=dri",
+        "--filesystem=xdg-config/tablet2latex:create"
+    ],
+    "build-options": {
+        "build-args": [
+            "--share=network"
+        ]
+    },
+    "modules": [
+        {
+            "name": "python3-requirements",
+            "buildsystem": "simple",
+            "build-commands": [
+                "pip3 install --prefix=${FLATPAK_DEST} pyperclip openai pillow numpy pycairo httpx typing_extensions distlib sniffio jiter anyio idna certifi"
+            ]
+        },
+        {
+            "name": "tablet2latex",
+            "buildsystem": "simple",
+            "build-commands": [
+                "sh -c 'set -e; SP=$(python3 -c \"import sysconfig; print(sysconfig.get_path(\\\"purelib\\\", vars={\\\"platbase\\\": \\\"${FLATPAK_DEST}\\\", \\\"base\\\": \\\"${FLATPAK_DEST}\\\"}))\" ); mkdir -p \"${SP}/tablet2latex\" \"${FLATPAK_DEST}/bin\" \"${FLATPAK_DEST}/share/applications\" \"${FLATPAK_DEST}/share/metainfo\" \"${FLATPAK_DEST}/share/icons/hicolor/scalable/apps\"; cp src/tablet2latex/*.py \"${SP}/tablet2latex/\"; install -Dm755 tablet2latex.py \"${FLATPAK_DEST}/bin/tablet2latex\"; install -Dm644 com.example.tablet2latex.desktop \"${FLATPAK_DEST}/share/applications/com.example.tablet2latex.desktop\"; install -Dm644 com.example.tablet2latex.metainfo.xml \"${FLATPAK_DEST}/share/metainfo/com.example.tablet2latex.metainfo.xml\"; install -Dm644 tablet2latex.svg \"${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/com.example.tablet2latex.svg\"'"
+            ],
+            "sources": [
+                {
+                    "type": "dir",
+                    "path": "."
+                }
+            ]
+        }
+    ]
+}
