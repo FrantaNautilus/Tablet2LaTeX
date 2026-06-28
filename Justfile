@@ -66,14 +66,14 @@ flatpak-setup:
 # Build Flatpak (non-installing)
 flatpak-build:
     @echo "🔨 Building Tablet2LaTeX Flatpak..."
-    flatpak-builder --force-clean build-dir com.example.tablet2latex.json
+    flatpak-builder --force-clean build-dir io.github.frantanautilus.tablet2latex.json
     @echo "✅ Build complete. Use 'just flatpak-install' to install locally."
 
 # Build and install Flatpak locally for the current user
 flatpak-install:
     @echo "📦 Building and installing Tablet2LaTeX Flatpak..."
-    flatpak-builder --force-clean --install --user build-dir com.example.tablet2latex.json
-    @echo "✅ Installed. Run with: flatpak run com.example.tablet2latex"
+    flatpak-builder --force-clean --install --user build-dir io.github.frantanautilus.tablet2latex.json
+    @echo "✅ Installed. Run with: flatpak run io.github.frantanautilus.tablet2latex"
 
 # Clean Flatpak build artifacts
 flatpak-clean:

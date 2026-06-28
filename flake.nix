@@ -179,7 +179,7 @@
 
           installPhase = ''
             mkdir -p $out/bin
-            cp tablet2latex_gtk.py $out/bin/tablet2latex
+            cp tablet2latex.py $out/bin/tablet2latex
             chmod +x $out/bin/tablet2latex
           '';
         };

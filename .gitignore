@@ -6,7 +6,10 @@ build-dir/
 export/
 *.flatpak
 .flatpak-builder/
-shared-modules/
+
+# Secrets / user config (never commit)
+config.ini
+config.ini.bak
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

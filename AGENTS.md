@@ -295,8 +295,8 @@ This script adds the parent directory to the Python path and imports from the pa
 ```
 tablet2latex/
 ├── tablet2latex.py        # Entry point script
-├── tablet2latex_gtk.py    # Original single-file version (deprecated)
-├── config.ini             # Configuration file
+├── config.example.ini     # Example configuration
+├── config.ini             # (gitignored) user configuration
 ├── requirements_gtk.txt   # Python dependencies
 ├── flake.nix              # Nix development environment
 ├── build-flatpak.sh       # Flatpak build script
@@ -385,10 +385,10 @@ Build and install Flatpak package:
 ./build-flatpak.sh
 
 # Install locally
-flatpak-builder --install --user com.example.tablet2latex.json
+flatpak-builder --install --user io.github.frantanautilus.tablet2latex.json
 
 # Run
-flatpak run com.example.tablet2latex
+flatpak run io.github.frantanautilus.tablet2latex
 ```
 
 ## Key Dependencies

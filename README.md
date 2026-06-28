@@ -71,7 +71,20 @@ sudo pacman -S python-gobject python-cairo gtk4 libadwaita
 
 ### Option 4: Using Flatpak
 
-TODO
+1. Install from source (requires flatpak-builder):
+   ```bash
+   just flatpak-setup     # one-time: install GNOME 50 SDK
+   just flatpak-install   # build + install for current user
+   ```
+2. Run:
+   ```bash
+   flatpak run io.github.frantanautilus.tablet2latex
+   ```
+3. Or build a `.flatpak` bundle:
+   ```bash
+   flatpak-builder --force-clean build-dir io.github.frantanautilus.tablet2latex.json
+   flatpak build-bundle repo tablet2latex.flatpak io.github.frantanautilus.tablet2latex
+   ```
 
 ## Configuration
 
@@ -172,8 +185,8 @@ llamacpp_model = llava
 ```
 tablet2latex/
 ├── tablet2latex.py        # Entry point script
-├── tablet2latex_gtk.py    # Original single-file version (deprecated)
-├── config.ini             # Configuration file
+├── config.example.ini     # Example configuration (copy to ~/.config/tablet2latex/config.ini)
+├── config.ini             # (gitignored) user configuration
 ├── requirements_gtk.txt   # Python dependencies
 ├── flake.nix              # Nix development environment
 ├── Justfile                 # just tasks (run, lint, test, flatpak-*, …)

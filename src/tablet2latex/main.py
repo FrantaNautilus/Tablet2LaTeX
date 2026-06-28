@@ -24,7 +24,7 @@ class Tablet2LaTeXApp(Adw.Application):
     def __init__(self):
         """Initialize the application."""
         super().__init__(
-            application_id="com.example.tablet2latex",
+            application_id="io.github.frantanautilus.tablet2latex",
             flags=Gio.ApplicationFlags.DEFAULT_FLAGS,
         )
 

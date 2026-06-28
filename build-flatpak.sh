@@ -14,23 +14,23 @@ if ! command -v flatpak-builder &> /dev/null; then
 fi
 
 # Check if we have the manifest
-if [ ! -f "com.example.tablet2latex.json" ]; then
-    echo "❌ Flatpak manifest not found: com.example.tablet2latex.json"
+if [ ! -f "io.github.frantanautilus.tablet2latex.json" ]; then
+    echo "❌ Flatpak manifest not found: io.github.frantanautilus.tablet2latex.json"
     exit 1
 fi
 
 # Build the Flatpak
 echo "📦 Building Flatpak package..."
-flatpak-builder --force-clean build-dir com.example.tablet2latex.json
+flatpak-builder --force-clean build-dir io.github.frantanautilus.tablet2latex.json
 
 echo "✅ Flatpak build completed successfully!"
 echo ""
 echo "📦 To install locally:"
-echo "   flatpak-builder --install --user build-dir com.example.tablet2latex.json"
+echo "   flatpak-builder --install --user build-dir io.github.frantanautilus.tablet2latex.json"
 echo ""
 echo "🚀 To run the application:"
-echo "   flatpak run com.example.tablet2latex"
+echo "   flatpak run io.github.frantanautilus.tablet2latex"
 echo ""
 echo "📦 To create a bundle:"
 echo "   flatpak build-export export build-dir"
-echo "   flatpak build-bundle export tablet2latex.flatpak com.example.tablet2latex"
+echo "   flatpak build-bundle export tablet2latex.flatpak io.github.frantanautilus.tablet2latex"
