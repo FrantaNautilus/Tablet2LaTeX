@@ -4,7 +4,6 @@
     "runtime-version": "50",
     "sdk": "org.gnome.Sdk",
     "command": "tablet2latex",
-    "skip-appstream-compose": true,
     "finish-args": [
         "--share=network",
         "--share=ipc",

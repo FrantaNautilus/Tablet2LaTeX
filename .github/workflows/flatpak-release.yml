@@ -8,40 +8,24 @@ on:
 
 jobs:
   flatpak:
-    name: Build Flatpak
+    name: "Flatpak"
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50
+      options: --privileged
     permissions:
       contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Flatpak and dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y flatpak flatpak-builder appstream-util
-          flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-          flatpak install -y --noninteractive \
-            org.gnome.Platform//50 \
-            org.gnome.Sdk//50
-
       - name: Build Flatpak
-        run: |
-          flatpak-builder --force-clean --repo=repo build-dir io.github.frantanautilus.tablet2latex.json
-
-      - name: Validate AppStream
-        run: |
-          appstream-util validate-relax build-dir/export/share/metainfo/io.github.frantanautilus.tablet2latex.metainfo.xml || true
-
-      - name: Create Flatpak bundle
-        run: |
-          flatpak build-bundle repo tablet2latex-${{ github.ref_name }}.flatpak io.github.frantanautilus.tablet2latex
-
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6
         with:
-          name: tablet2latex-flatpak
-          path: tablet2latex-${{ github.ref_name }}.flatpak
+          bundle: tablet2latex-${{ github.ref_name }}.flatpak
+          manifest-path: io.github.frantanautilus.tablet2latex.json
+          cache-key: flatpak-builder-${{ github.sha }}
+          upload-artifact: true
 
       - name: Upload to GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
